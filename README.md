@@ -67,5 +67,36 @@ ReactDOM.render(
  Or use the Ternary operators.<br>
  In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.
  
+## Lists & Keys:
+
+```
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map((number) => number * 2);console.log(doubled);
+```
+
+Rendering Multiple Items:
+
+You can build collections of elements and include them in JSX using curly braces {}.
+
+Below, we loop through the numbers array using the JavaScript map() function. We return a <li> element for each item. Finally, we assign the resulting array of elements to listItems:
   
+```
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =>  <li>{number}</li>);
+
+Then, we can include the entire listItems array inside a <ul> element:
+
+<ul>{listItems}</ul>
+```
+
+Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity: <br>
+  
+We don’t recommend using indexes for keys if the order of items may change. This can negatively impact performance and may cause issues with component state. Check out Robin Pokorny’s article for an in-depth explanation on the negative impacts of using an index as a key. If you choose not to assign an explicit key to list items then React will default to using indexes as keys.
+
+![image](https://user-images.githubusercontent.com/42742924/163166703-90044b8e-97c5-499d-aef4-cc885dcb2f1c.png)
+
+![image](https://user-images.githubusercontent.com/42742924/163166723-ddb30ffb-24e3-46a0-b081-6cb9fbf446a4.png)
+
+  
+  Key doesn't get passed into the props if we want used another name.
 
