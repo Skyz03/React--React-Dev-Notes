@@ -45,14 +45,14 @@ function withdraw(account, amount) {
 - All React components must act like pure functions with respect to their props.
 - Props VS State => the true/false condition we pass like starting game or dice one.
 
-1.               Props are read-only. 	State changes can be asynchronous.
-2.               Props are immutable. 	State is mutable.
-3.               Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
-4.               Props can be accessed by the child component. 	State cannot be accessed by child components.
-5.               Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
-6.               Stateless component can have Props. 	Stateless components cannot have State.
-7.               Props make components reusable. 	State cannot make components reusable.
-8.               Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
+1.                         Props are read-only. 	State changes can be asynchronous.
+2.                         Props are immutable. 	State is mutable.
+3.                         Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
+4.                         Props can be accessed by the child component. 	State cannot be accessed by child components.
+5.                         Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
+6.                         Stateless component can have Props. 	Stateless components cannot have State.
+7.                         Props make components reusable. 	State cannot make components reusable.
+8.                         Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
 
 ## Conditional Rendering
 
@@ -210,3 +210,41 @@ What the their use cases:
 - Loaders
 
 [More on this article](https://blog.bitsrc.io/understanding-react-portals-ab79827732c7)
+
+## Error Boundries:
+
+It is a class component.
+
+[Article](https://www.digitalocean.com/community/tutorials/react-error-boundaries)
+[NPM](https://www.npmjs.com/package/react-error-boundary)
+
+Error Boundaries were introduced in React v16 as a way to catch tricky errors that occur during the render phase. In the past, this would have caused the app to unmount completely, and the user would just see a blank web page, which is not ideal!
+
+Error Boundaries actually aren’t in direct competition with try...catch statements. Error Boundaries are only designed for intercepting errors that originate from 3 places in a React component:
+
+    During render phase
+    In a lifecycle method
+    In the constructor
+
+Basically… the React-y parts of a component.
+
+As a counterpoint, these are the places where Error Boundaries will not be able to catch an error:
+
+    Event handlers (e.g., onClick, onChange, etc.)
+    setTimeout or requestAnimationFramecallbacks
+    Server-side rendering (SSR)
+    And errors caused by the error boundary itself (rather than its children)
+
+So Error Boundaries don’t really impact how you use try...catch. They’re both needed as a robust strategy for handling errors in React.
+
+## Fiber Artitechture:
+
+Its like the algorithm behind the react code.
+
+[Best article](https://dev.to/burhanuday/react-internals-fiber-architecture-280l)
+
+[Simple](https://www.youtube.com/watch?v=gsvHmZ3hXjo)
+
+[Lin](https://www.youtube.com/watch?v=ZCuYPiUIONs)
+
+[Devz](https://dzone.com/articles/understanding-of-react-fiber-architecture)
