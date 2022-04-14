@@ -101,10 +101,60 @@ We don’t recommend using indexes for keys if the order of items may change. Th
 Key doesn't get passed into the props if we want used another name.
 
   
- ## Context
- 
- Context provides a way to pass data through the component tree without having to pass props down manually at every level.
- Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.
+## Context:
+
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.
+  
+When to use it?
+
+  1. Light & dark theme
+  2. User data for authentication.
+  3. Location specific data like language or locale
+  
+You can think of React context as the equivalent of global variables for our React components.
+
+  What Problem Does it Solve
+- Props Drilling:
+```
+export default function App({ theme }) {
+  return (
+    <>
+      <Header theme={theme} />
+      <Main theme={theme} />
+      <Sidebar theme={theme} />
+      <Footer theme={theme} />
+    </>
+  );
+}
+
+function Header({ theme }) {
+  return (
+    <>
+      <User theme={theme} />
+      <Login theme={theme} />
+      <Menu theme={theme} />
+    </>
+  );
+}
+```
+```
+The issue is that we are drilling the theme prop through multiple components that don't immediately need it.
+
+The Header component doesn't need theme other than to pass it down to its child component. In other words, it would be better for User , Login and Menu to consume the theme data directly.
+
+This is the benefit of React context – we can bypass using props entirely and therefore avoid the issue of props drilling.
+
+The 4 easy steps to use context:
+There are four steps to using React context:
+
+- Create context using the createContext method.
+- Take your created context and wrap the context provider around your component tree.
+- Put any value you like on your context provider using the value prop.
+- Read that value within any component by using the context consumer.
+
+
+
   
   
   
