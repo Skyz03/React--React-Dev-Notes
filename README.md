@@ -45,14 +45,14 @@ function withdraw(account, amount) {
 - All React components must act like pure functions with respect to their props.
 - Props VS State => the true/false condition we pass like starting game or dice one.
 
-1.          Props are read-only. 	State changes can be asynchronous.
-2.          Props are immutable. 	State is mutable.
-3.          Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
-4.          Props can be accessed by the child component. 	State cannot be accessed by child components.
-5.          Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
-6.          Stateless component can have Props. 	Stateless components cannot have State.
-7.          Props make components reusable. 	State cannot make components reusable.
-8.          Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
+1.               Props are read-only. 	State changes can be asynchronous.
+2.               Props are immutable. 	State is mutable.
+3.               Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
+4.               Props can be accessed by the child component. 	State cannot be accessed by child components.
+5.               Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
+6.               Stateless component can have Props. 	Stateless components cannot have State.
+7.               Props make components reusable. 	State cannot make components reusable.
+8.               Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
 
 ## Conditional Rendering
 
@@ -180,12 +180,33 @@ It has three uses:
 
 It refers to a technique for sharing code between React Components using a prop whose value is a function.
 MOre information on this article useful: [Medium](https://medium.com/geekculture/render-props-in-reactjs-d672e3106bc1).
-[Samshing](https://www.smashingmagazine.com/2020/06/higher-order-components-react/)
 
 And need to follow couple of youtube videos.
 
 ## Higher Order Components:
 
+A higher order function is a function that takes a function as an argument, or returns a function. Higher order function is in contrast to first order functions, which don’t take a function as an argument or return a function as output.
+
+A higher-order component (HOC) is an advanced technique in React for reusing component logic. HOCs are not part of the React API, per se. They are a pattern that emerges from React’s compositional nature.
+
 Higher-order components (HOCs) in React were inspired by higher-order functions in JavaScript. A HOC is an advanced technique for reusing logic in React components. It is a pattern created out of React’s compositional nature.
 
 HOCs basically incorporate the don’t-repeat-yourself (DRY) principle of programming, which you’ve most likely come across at some point in your career as a software developer. It is one of the best-known principles of software development, and observing it is very important when building an application or writing code in general.
+[Samshing](https://www.smashingmagazine.com/2020/06/higher-order-components-react/)
+[Medium](https://medium.com/javascript-scene/higher-order-functions-composing-software-5365cf2cbe99)
+
+## Portals:
+
+Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+For instance, like their is a root id and their is a portal id.
+It keeps the event and other delegation of the parent eleement but reder it outside of the root element.
+[Youtube in 12mins](https://www.youtube.com/watch?v=LyLa7dU5tp8)
+
+What the their use cases:
+
+- Modal dialog boxes.
+- ToolTips
+- HoverCards
+- Loaders
+
+[More on this article](https://blog.bitsrc.io/understanding-react-portals-ab79827732c7)
