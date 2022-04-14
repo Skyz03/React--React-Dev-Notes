@@ -98,5 +98,14 @@ We don’t recommend using indexes for keys if the order of items may change. Th
 ![image](https://user-images.githubusercontent.com/42742924/163166723-ddb30ffb-24e3-46a0-b081-6cb9fbf446a4.png)
 
   
-  Key doesn't get passed into the props if we want used another name.
+Key doesn't get passed into the props if we want used another name.
 
+  
+ ## Context
+ 
+ Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+ Context provides a way to share values like these between components without having to explicitly pass a prop through every level of the tree.
+  
+  
+  
+  
