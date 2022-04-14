@@ -153,6 +153,34 @@ There are four steps to using React context:
 - Put any value you like on your context provider using the value prop.
 - Read that value within any component by using the context consumer.
 
+Ref or useRef Hooks:
+
+The useRef Hook allows you to persist values between renders.<br>
+It can be used to store a mutable value that does not cause a re-render when updated.<br>
+It can be used to access a DOM element directly.<br>
+
+If we tried to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.<br>
+
+To avoid this, we can use the useRef Hook. It can be used in the the counter of the application.
+
+It has three uses: 
+
+[W3](https://www.w3schools.com/react/react_useref.asp)
+- Use useRef to track application renders.
+- useRef() only returns one item. It returns an Object called current.
+- Accessing DOM Elements
+- Tracking State Changes
+
+## Render Props
+
+It refers to a technique for sharing code between React Components using a prop whose value is a function.
+Found this article useful: [Medium](https://medium.com/geekculture/render-props-in-reactjs-d672e3106bc1)
+
+And need to follow couple of youtube videos.
+
+## Higher Order Components:
+
+
 
 
   
