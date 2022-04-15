@@ -806,3 +806,242 @@ ReactDOM.render(<App />, document.getElementById('root'));
 This time we use a combination of useState, useEffect, and useRef to keep track of the previous state.
 
 In the useEffect, we are updating the useRef current value each time the inputValue is updated by entering text into the input field.
+
+### userReducer Hook: 
+This is the similar hook as useState Hook. 
+
+It allows for custom state logic.
+
+If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
+
+The useReducer Hook accepts two arguments.
+
+useReducer(<reducer>, <initialState>)
+
+
+The reducer function contains your custom state logic and the initialStatecan be a simple value but generally will contain an object.
+
+The useReducer Hook returns the current stateand a dispatchmethod.
+
+Here is an example of useReducer in a counter app:
+Example:
+```
+import { useReducer } from "react";
+import ReactDOM from "react-dom";
+
+const initialTodos = [
+  {
+    id: 1,
+    title: "Todo 1",
+    complete: false,
+  },
+  {
+    id: 2,
+    title: "Todo 2",
+    complete: false,
+  },
+];
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "COMPLETE":
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: !todo.complete };
+        } else {
+          return todo;
+        }
+      });
+    default:
+      return state;
+  }
+};
+
+function Todos() {
+  const [todos, dispatch] = useReducer(reducer, initialTodos);
+
+  const handleComplete = (todo) => {
+    dispatch({ type: "COMPLETE", id: todo.id });
+  };
+
+  return (
+    <>
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <label>
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleComplete(todo)}
+            />
+            {todo.title}
+          </label>
+        </div>
+      ))}
+    </>
+  );
+}
+
+ReactDOM.render(<Todos />, document.getElementById('root'));
+```
+This is just the logic to keep track of the todo complete status.
+
+All of the logic to add, delete, and complete a todo could be contained within a single useReducer Hook by adding more actions.
+
+### useCallback Hook: 
+
+The React useCallback Hook returns a memoized callback function.
+
+Think of memoization as caching a value so that it does not need to be recalculated.
+
+This allows us to isolate resource intensive functions so that they will not automatically run on every render.
+
+The useCallback Hook only runs when one of its dependencies update.
+
+This can improve performance.
+
+Problem:
+
+One reason to use useCallback is to prevent a component from re-rendering unless its props have changed.
+
+In this example, you might think that the Todos component will not re-render unless the todos change:
+
+```
+index.js
+
+import { useState } from "react";
+import ReactDOM from "react-dom";
+import Todos from "./Todos";
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+
+  return (
+    <>
+      <Todos todos={todos} addTodo={addTodo} />
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+      </div>
+    </>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+Todos.js
+
+import { memo } from "react";
+
+const Todos = ({ todos, addTodo }) => {
+  console.log("child render");
+  return (
+    <>
+      <h2>My Todos</h2>
+      {todos.map((todo, index) => {
+        return <p key={index}>{todo}</p>;
+      })}
+      <button onClick={addTodo}>Add Todo</button>
+    </>
+  );
+};
+
+export default memo(Todos);
+```
+
+Try running this and click the count increment button.
+
+You will notice that the Todos component re-renders even when the todos do not change.
+
+Why does this not work? We are using memo, so the Todos component should not re-render since neither the todos state nor the addTodo function are changing when the count is incremented.
+
+This is because of something called "referential equality".
+
+Every time a component re-renders, its functions get recreated. Because of this, the addTodo function has actually changed.
+
+
+To fix this, we can use the useCallback hook
+
+```
+Replace addtodo with this
+const addTodo = useCallback(() => {
+    setTodos((t) => [...t, "New Todo"]);
+  }, [todos]);
+```
+
+### useMemo Hook:
+
+The React useMemo Hook returns a memoized value.
+
+Think of memoization as caching a value so that it does not need to be recalculated.
+
+The useMemo Hook only runs when one of its dependencies update.
+
+This can improve performance.
+Use useMemo
+
+To fix this performance issue, we can use the useMemo Hook to memoize the expensiveCalculation function. This will cause the function to only run when needed.
+
+We can wrap the expensive function call with useMemo.
+
+The useMemoHook accepts a second parameter to declare dependencies. The expensive function will only run when its dependencies have changed.
+
+In the following example, the expensive function will only run when count is changed and not when todo's are added.
+Example:
+
+Performance example using the useMemo Hook:
+```
+import { useState, useMemo } from "react";
+import ReactDOM from "react-dom";
+
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState([]);
+  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+
+  const increment = () => {
+    setCount((c) => c + 1);
+  };
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+
+  return (
+    <div>
+      <div>
+        <h2>My Todos</h2>
+        {todos.map((todo, index) => {
+          return <p key={index}>{todo}</p>;
+        })}
+        <button onClick={addTodo}>Add Todo</button>
+      </div>
+      <hr />
+      <div>
+        Count: {count}
+        <button onClick={increment}>+</button>
+        <h2>Expensive Calculation</h2>
+        {calculation}
+      </div>
+    </div>
+  );
+};
+
+const expensiveCalculation = (num) => {
+  console.log("Calculating...");
+  for (let i = 0; i < 1000000000; i++) {
+    num += 1;
+  }
+  return num;
+};
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
