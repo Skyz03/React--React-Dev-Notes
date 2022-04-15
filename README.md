@@ -427,6 +427,114 @@ ReactDOM.render(<Car />, document.getElementById('root'));
 We then return an object, spreading the previousState and overwriting only the color.
 
 
+### useEffect Hook: 
+
+The useEffect Hook allows you to perform side effects in your components.
+
+Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+
+useEffect accepts two arguments. The second argument is optional.
+
+useEffect(<function>, <dependency>)
+
+First example: Where it renders every time like a clock. 
+
+```
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  });
+
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+ReactDOM.render(<Timer />, document.getElementById('root'));
+```
+
+Here, it runs on every render, when the count changes the render hsppens which then triggers another effect. 
+
+For sometime this is good but for some time except the clock this is not good and we only need to run it once, as a matter of fact the second array parameter is optional. 
+
+
+1. No dependency passed:
+
+useEffect(() => {
+  //Runs on every render
+});
+
+2. An empty array:
+
+useEffect(() => {
+  //Runs only on the first render
+}, []);
+
+3. Props or state values:
+
+useEffect(() => {
+  //Runs on the first render
+  //And any time any dependency value changes
+}, [prop, state]);
+
+So, to avoid the running of the render everytime. 
+add and empty bracket. 
+
+```
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
+
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+  }, []); // <- add empty brackets here
+
+  return <h1>I've rendered {count} times!</h1>;
+}
+
+ReactDOM.render(<Timer />, document.getElementById('root'));
+```
+
+If there are multiple dependencies, they should be included in the useEffect dependency array.
+
+Cleaning up the effect: 
+
+Some effects require cleanup to reduce memory leaks.
+
+Timeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed.
+
+We do this by including a return function at the end of the useEffect Hook.
+
+```
+useEffect(() => {
+    let timer = setTimeout(() => {
+    setCount((count) => count + 1);
+  }, 1000);
+
+  return () => clearTimeout(timer)
+  }, []);
+```
+
+### useContext Hook:
+
+This is a way to manage state globally. 
+
+It can be used together with the useState Hook to share state between deeply nested components more easily than with useState alone.
+
+
+
+
+
+
 
 
 
