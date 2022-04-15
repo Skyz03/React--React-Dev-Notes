@@ -45,14 +45,14 @@ function withdraw(account, amount) {
 - All React components must act like pure functions with respect to their props.
 - Props VS State => the true/false condition we pass like starting game or dice one.
 
-1.                                  Props are read-only. 	State changes can be asynchronous.
-2.                                  Props are immutable. 	State is mutable.
-3.                                  Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
-4.                                  Props can be accessed by the child component. 	State cannot be accessed by child components.
-5.                                  Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
-6.                                  Stateless component can have Props. 	Stateless components cannot have State.
-7.                                  Props make components reusable. 	State cannot make components reusable.
-8.                                  Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
+1.                                    Props are read-only. 	State changes can be asynchronous.
+2.                                    Props are immutable. 	State is mutable.
+3.                                    Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
+4.                                    Props can be accessed by the child component. 	State cannot be accessed by child components.
+5.                                    Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
+6.                                    Stateless component can have Props. 	Stateless components cannot have State.
+7.                                    Props make components reusable. 	State cannot make components reusable.
+8.                                    Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
 
 ## Conditional Rendering
 
@@ -270,3 +270,164 @@ There are different hooks for different purposes:
 5. useMemo.
 6. useReducer.
 7. useContext.
+
+### useState:
+
+The React useState Hook allows us to track state in a function component.
+State generally refers to data or properties that need to be tracking in an application.
+
+Initialize useState
+
+```
+import { useState } from "react";
+
+function FavoriteColor() {
+  const [color, setColor] = useState("");
+}
+```
+
+Read State: 
+
+```
+import { useState } from "react";
+import ReactDOM from "react-dom";
+
+function FavoriteColor() {
+  const [color, setColor] = useState("red");
+
+  return <h1>My favorite color is {color}!</h1>
+}
+
+The color component is being read.
+
+ReactDOM.render(<FavoriteColor />, document.getElementById('root'));
+```
+
+Update State: 
+
+To Update our state, we use our state updater function.
+
+Never directly update the state. 
+
+For instance, 
+```
+import { useState } from "react";
+import ReactDOM from "react-dom";
+
+function FavoriteColor() {
+  const [color, setColor] = useState("red");
+
+  return (
+    <>
+      <h1>My favorite color is {color}!</h1>
+      <button
+        type="button"
+        onClick={() => setColor("blue")}
+      >Blue</button>
+    </>
+  )
+}
+
+ReactDOM.render(<FavoriteColor />, document.getElementById('root'));
+```
+
+The possibilities of the useState: 
+
+The useState Hook can be used to keep track of strings, numbers, booleans, arrays, objects, and any combination of these!
+
+1. Creating multiple state: 
+
+```
+import { useState } from "react";
+import ReactDOM from "react-dom";
+
+function Car() {
+  const [brand, setBrand] = useState("Ford");
+  const [model, setModel] = useState("Mustang");
+  const [year, setYear] = useState("1964");
+  const [color, setColor] = useState("red");
+
+  return (
+    <>
+      <h1>My {brand}</h1>
+      <p>
+        It is a {color} {model} from {year}.
+      </p>
+    </>
+  )
+}
+
+ReactDOM.render(<Car />, document.getElementById('root'));
+```
+
+2. Use of Object that holds the object.
+
+```
+import { useState } from "react";
+import ReactDOM from "react-dom";
+
+function Car() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+
+  return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+    </>
+  )
+}
+
+ReactDOM.render(<Car />, document.getElementById('root'));
+```
+
+While updating our state when we just call the respective color to state it it gets overwritten and remove the previous data. 
+This is where the spread operator comes in handy as shown in the example below. 
+
+```
+import { useState } from "react";
+import ReactDOM from "react-dom";
+
+function Car() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+
+  const updateColor = () => {
+    setCar(previousState => {
+      return { ...previousState, color: "blue" }
+    });
+  }
+
+  return (
+    <>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+      <button
+        type="button"
+        onClick={updateColor}
+      >Blue</button>
+    </>
+  )
+}
+
+ReactDOM.render(<Car />, document.getElementById('root'));
+```
+We then return an object, spreading the previousState and overwriting only the color.
+
+
+
+
+
+
