@@ -45,14 +45,14 @@ function withdraw(account, amount) {
 - All React components must act like pure functions with respect to their props.
 - Props VS State => the true/false condition we pass like starting game or dice one.
 
-1.                         Props are read-only. 	State changes can be asynchronous.
-2.                         Props are immutable. 	State is mutable.
-3.                         Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
-4.                         Props can be accessed by the child component. 	State cannot be accessed by child components.
-5.                         Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
-6.                         Stateless component can have Props. 	Stateless components cannot have State.
-7.                         Props make components reusable. 	State cannot make components reusable.
-8.                         Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
+1.                               Props are read-only. 	State changes can be asynchronous.
+2.                               Props are immutable. 	State is mutable.
+3.                               Props allow you to pass data from one component to other components as an argument. 	State holds information about the components.
+4.                               Props can be accessed by the child component. 	State cannot be accessed by child components.
+5.                               Props are used to communicate between components. 	States can be used for rendering dynamic changes with the component.
+6.                               Stateless component can have Props. 	Stateless components cannot have State.
+7.                               Props make components reusable. 	State cannot make components reusable.
+8.                               Props are external and controlled by whatever renders the component. 	The State is internal and controlled by the React Component itself.
 
 ## Conditional Rendering
 
@@ -248,3 +248,25 @@ Its like the algorithm behind the react code.
 [Lin](https://www.youtube.com/watch?v=ZCuYPiUIONs)
 
 [Devz](https://dzone.com/articles/understanding-of-react-fiber-architecture)
+
+## React Hooks:
+
+Hooks allow us to "hook" into React features such as state and lifecycle methods. So, that we don't have to use them anymore.
+
+You must import Hooks from react.
+
+There are 3 rules of Hooks:
+
+- Hooks can only be called inside React function components.
+- Hooks can only be called at the top level of a component.
+- Hooks cannot be conditional
+
+There are different hooks for different purposes:
+
+1. useState.
+2. useEffect.
+3. useCallback.
+4. useRef.
+5. useMemo.
+6. useReducer.
+7. useContext.
